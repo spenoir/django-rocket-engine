@@ -12,6 +12,7 @@ on_appengine = on_appengine_remote
 os.path.abspath(os.curdir)
 
 PROJECT_DIR = os.path.abspath(os.getcwd())
+DEFAULT_PORT = '8000'
 
 
 def get_appengine_sdk_path():
