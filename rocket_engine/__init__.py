@@ -42,7 +42,7 @@ def get_appengine_sdk_path():
     sys.exit(1)
 
 
-def setup_appendine_sdk():
+def setup_appengine_sdk():
     try:
         import dev_appserver
     except ImportError:
@@ -56,7 +56,7 @@ def setup_appendine_sdk():
         sys.path.extend(dev_appserver.GOOGLE_SQL_EXTRA_PATHS)
 
 
-def path_appendine_sdk():
+def path_appengine_sdk():
 
     if not os.environ.get('DJANGO_SETTINGS_MODULE'):
         os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
@@ -88,7 +88,7 @@ def path_appendine_sdk():
 
 
 if not on_appengine_remote:
-    setup_appendine_sdk()
-path_appendine_sdk()
+    setup_appengine_sdk()
+path_appengine_sdk()
 
 wsgi = WSGIHandler()
