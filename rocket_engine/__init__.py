@@ -2,8 +2,12 @@ import os
 import sys
 
 
-from django.core.handlers.wsgi import WSGIHandler
-from django.core import signals
+try:
+    from django.core.handlers.wsgi import WSGIHandler
+    from django.core import signals
+except ImportError:
+    import logging
+    logging.warn('Make sure you have django set in app.yaml as a library')
 
 on_appengine_remote = os.getenv('SERVER_SOFTWARE','')\
                         .startswith('Google App Engine')

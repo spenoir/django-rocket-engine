@@ -28,6 +28,11 @@ requirements_file = os.path.join(
     PROJECT_DIR, APPENGINE_REQUIREMENTS_FILE
 )
 
+# requirements file defaults to django root or same as settings dir
+# you can override this in your settings file by setting:
+if hasattr(settings, 'APPENGINE_REQUIREMENTS_FILE'):
+    requirements_file = getattr(settings, 'APPENGINE_REQUIREMENTS_FILE')
+
 virtualenv = os.path.join(PROJECT_DIR, APPENGINE_VIRTUALENV)
 virtualenv_cache = os.path.join(virtualenv, 'cache')
 virtualenv_appengine_libs = os.path.join(virtualenv, 'appengine_libs')
@@ -57,6 +62,7 @@ class Command(BaseCommand):
             ).wait()
 
         if not os.path.exists(virtualenv_appengine_libs):
+            print virtualenv_appengine_libs
             os.mkdir(virtualenv_appengine_libs)
 
         shutil.copytree(
