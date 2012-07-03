@@ -62,7 +62,6 @@ class Command(BaseCommand):
             ).wait()
 
         if not os.path.exists(virtualenv_appengine_libs):
-            print virtualenv_appengine_libs
             os.mkdir(virtualenv_appengine_libs)
 
         shutil.copytree(
@@ -70,6 +69,9 @@ class Command(BaseCommand):
             os.path.join(PROJECT_DIR, 'rocket_engine')
         )
 
+        # this seems to break iin following scenarios
+        # 1. If you have commented a requirement out in requirements.txt
+        # 2. If you use a package on github (could be due to slow connection issues)
         if os.path.exists(requirements_file):
             subprocess.Popen(
                 shlex.split(
